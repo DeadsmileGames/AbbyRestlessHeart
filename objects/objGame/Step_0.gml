@@ -3,7 +3,7 @@ if (config_cooldown > 0) config_cooldown--;
 
 var key_z = keyboard_check_pressed(ord("Z"));
 var key_x = keyboard_check_pressed(ord("X"));
-var key_menu = keyboard_check_pressed(ord("C")) || keyboard_check_pressed(vk_escape);
+var key_menu = keyboard_check_pressed(ord("C"));
 var play_beep = false;
 
 if (menu_sub_state == "submenu_load_info") {
@@ -166,7 +166,7 @@ if (config_open) {
         switch (config_tab) {
             case 0: max_idx = 0; break;
             case 1: max_idx = 1; break;
-            case 2: max_idx = array_length(controls) - 1; break;
+            case 2: max_idx = 0; break;
             case 3: max_idx = 0; break;
         }
         if (keyboard_check_pressed(vk_up)) { config_idx--; if (config_idx < 0) config_idx = max_idx; play_beep = true; }
@@ -204,8 +204,6 @@ if (config_open) {
                 }
             }
         }
-        if (config_tab == 2) {
-        }
         if (config_tab == 3) {
             if (config_idx == 0 && key_z) {
                 url_open("https://somiari.itch.io/insomnia");
@@ -225,6 +223,7 @@ for (var i = array_length(shatter_particles) - 1; i >= 0; i--) {
     p.alpha -= 0.02;
     if (p.alpha <= 0) array_delete(shatter_particles, i, 1);
 }
+
 var gui_w = display_get_gui_width();
 var gui_h = display_get_gui_height();
 for (var i = 0; i < max_pixels; i++) {
@@ -235,6 +234,7 @@ for (var i = 0; i < max_pixels; i++) {
         pixel_list[i].spd = random_range(0.5, 1.5);
     }
 }
+
 if (is_transitioning) {
     var all_slices_full = true;
     for (var i = 0; i < slice_count; i++) {
@@ -249,6 +249,7 @@ if (is_transitioning) {
         if (transition_timer >= 30) instance_destroy();
     }
 }
+
 if (play_beep) {
     var sfx = audio_play_sound(Beep, 1, false);
     audio_sound_gain(sfx, global.vol_sfx, 0);

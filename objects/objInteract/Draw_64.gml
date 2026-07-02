@@ -1,4 +1,4 @@
-if (show_prompt) {
+if (show_prompt && !instance_exists(objBattleManager)) {
     var _cam = view_camera[0];
     var _cam_x = camera_get_view_x(_cam);
     var _cam_y = camera_get_view_y(_cam);

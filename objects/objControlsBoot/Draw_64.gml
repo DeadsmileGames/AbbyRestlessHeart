@@ -30,18 +30,60 @@ draw_rectangle(bx2 - corner, by1, bx2, by1 + corner, true);
 draw_rectangle(bx1, by2 - corner, bx1 + corner, by2, true);
 draw_rectangle(bx2 - corner, by2 - corner, bx2, by2, true);
 
-draw_set_font(global.fonteNormal);
-draw_set_halign(fa_center);
-draw_set_valign(fa_top);
-draw_set_color(c_white);
-draw_text(base_x, by1 + 20, "CONTROLS");
+if (!credits_open) {
+    draw_set_font(global.fonteNormal);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_top);
+    draw_set_color(c_white);
+    draw_text(base_x, by1 + 20, "CONTROLS");
 
-for (var i = 0; i < array_length(controls_list); i++) {
-    var y_pos = by1 + 70 + (i * 32);
-    var col = c_white;
-    if (i == array_length(controls_list) - 1) col = c_red;
-    draw_set_color(col);
-    draw_text(base_x, y_pos, controls_list[i]);
+    for (var i = 0; i < array_length(controls_list); i++) {
+        var y_pos = by1 + 70 + (i * 32);
+        var col = c_white;
+        if (i == array_length(controls_list) - 1) col = c_red;
+        draw_set_color(col);
+        draw_text(base_x, y_pos, controls_list[i]);
+    }
+
+    var menu_y = by2 - 100;
+    for (var i = 0; i < array_length(options); i++) {
+        var y_pos = menu_y + (i * 45);
+        var txt = options[i];
+        if (selected_option == i) {
+            draw_set_color(c_yellow);
+            txt = "> " + txt + " <";
+        } else {
+            draw_set_color(c_white);
+        }
+        draw_set_font(global.fonteNormal);
+        draw_set_halign(fa_center);
+        draw_set_valign(fa_middle);
+        draw_text(base_x, y_pos, txt);
+    }
+} else {
+    draw_set_font(global.fonteNormal);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_top);
+    draw_set_color(c_yellow);
+    draw_text(base_x, by1 + 20, "CREDITS");
+
+    for (var i = 0; i < array_length(credits_list); i++) {
+        var y_pos = by1 + 65 + (i * 24);
+        
+        if (i == 0 || i == 2 || i == 5 || i == 8 || i == 11) {
+            draw_set_color(make_color_rgb(200, 200, 200));
+        } else {
+            draw_set_color(c_white);
+        }
+        
+        draw_text(base_x, y_pos, credits_list[i]);
+    }
+
+    draw_set_font(global.fonteLegenda);
+    draw_set_color(c_gray);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_bottom);
+    draw_text(base_x, by2 - 40, "Press [X] to return");
 }
 
 draw_set_font(global.fonteLegenda);
@@ -49,19 +91,3 @@ draw_set_color(c_gray);
 draw_set_halign(fa_center);
 draw_set_valign(fa_bottom);
 draw_text(base_x, by2 - 12, title_text);
-
-var menu_y = by2 - 100;
-for (var i = 0; i < array_length(options); i++) {
-    var y_pos = menu_y + (i * 45);
-    var txt = options[i];
-    if (selected_option == i) {
-        draw_set_color(c_yellow);
-        txt = "> " + txt + " <";
-    } else {
-        draw_set_color(c_white);
-    }
-    draw_set_font(global.fonteNormal);
-    draw_set_halign(fa_center);
-    draw_set_valign(fa_middle);
-    draw_text(base_x, y_pos, txt);
-}

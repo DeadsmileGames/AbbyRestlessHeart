@@ -27,27 +27,16 @@ draw_text_ext_transformed(base_x, gui_h / 2 - 40, hope_text, 24, gui_w - 300, te
 draw_set_alpha(text_alpha);
 
 var menu_y_start = gui_h / 2 + 60;
-for (var i = 0; i < array_length(main_options); i++) {
-    var x_pos = base_x;
-    var y_pos = menu_y_start + (i * 50);
-    
-    if (i == 0 && shattered_try) {
-        draw_set_color(c_gray);
-        draw_text_transformed(x_pos, y_pos, "YOU HAVE NO SAVES LEFT.", text_scale, text_scale, 0);
-        continue;
+
+if (shattered_try) {
+    if (shake_try > 0) {
+        base_x += random_range(-shake_try/4, shake_try/4);
     }
-    
-    if (i == 0 && shake_try > 0) {
-        x_pos += random_range(-shake_try/4, shake_try/4);
-    }
-    
-    if (menu_index == i) {
-        draw_set_color(c_white);
-        draw_text_transformed(x_pos, y_pos, "> " + main_options[i] + " <", text_scale, text_scale, 0);
-    } else {
-        draw_set_color(c_gray);
-        draw_text_transformed(x_pos, y_pos, main_options[i], text_scale, text_scale, 0);
-    }
+    draw_set_color(c_red);
+    draw_text_transformed(base_x, menu_y_start, "NO SAVE FOUND. PLEASE RESTART THE GAME TO CREATE ONE.", text_scale, text_scale, 0);
+} else {
+    draw_set_color(c_white);
+    draw_text_transformed(base_x, menu_y_start, "> " + main_options[0] + " <", text_scale, text_scale, 0);
 }
 
 if (save_menu_open) {

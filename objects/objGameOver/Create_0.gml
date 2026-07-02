@@ -6,7 +6,7 @@ title_text = "GAME OVER";
 hope_text = "Even in the deepest dark, the morning eventually finds a way.";
 
 menu_index = 0;
-main_options = ["TRY AGAIN", "START NEW GAME"];
+main_options = ["TRY AGAIN"];
 
 save_menu_open = false;
 save_index = 0;

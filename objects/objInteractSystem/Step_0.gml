@@ -11,7 +11,7 @@ if (!processing && array_length(global.interact_queue) > 0) {
     processing = true;
     array_delete(global.interact_queue, 0, 1);
     
-    dialogue("", text, 0.3, color, global.fonteNormal, -1);
+    dialogue(title, text, 0.3, color, global.fonteNormal, -1);
 }
 
 if (processing && !instance_exists(objDialogue)) {

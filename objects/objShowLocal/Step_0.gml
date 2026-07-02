@@ -1,7 +1,7 @@
 switch (state) {
     case 0:
-        alpha = min(1, alpha + speed);
-        slide_offset = min(0, slide_offset + speed * 350);
+        alpha = min(1, alpha + speed * 1.2);
+        slide_offset = min(0, slide_offset + speed * 200);
         if (alpha >= 1) {
             alpha = 1;
             slide_offset = 0;
@@ -16,7 +16,7 @@ switch (state) {
         }
         break;
     case 2:
-        alpha = max(0, alpha - speed * 0.5);
+        alpha = max(0, alpha - speed * 0.8);
         if (alpha <= 0) {
             instance_destroy();
         }

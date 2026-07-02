@@ -6,3 +6,7 @@ if (global.puzzle_active) exit;
 if (instance_exists(objSleepTrigger)) {
 	if (objSleepTrigger.sleeping) exit;
 }
+
+if (instance_exists(objBattleManager)) {
+	exit;
+}

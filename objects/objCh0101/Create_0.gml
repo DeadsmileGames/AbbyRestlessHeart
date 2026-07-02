@@ -1,9 +1,9 @@
-global.current_chapter = 1;
 started_story = false;
+global.current_objective = "Explore the world.";
 
 CreateInteract(1490, 318, "???", "HELLOOOO!!!!! Welcome to your mind, Mila!!!!", c_white, 50);
-CreateInteract(2650, 330, "???", "OOOMG, IT'S RELLY YOU MILA!!!!!", c_white, 50);
-
+CreateInteract(2460, 335, "???", "OOOMG, IT'S RELLY YOU MILA!!!!!", c_white, 50);
+CreateInteract(3120, 378, "???", "OOOMG, IT'S RELLY YOU MILA!!!!!", c_white, 50);
 
 if (audio_is_playing(AbbyMind)) {
     audio_stop_sound(AbbyMind)

@@ -39,7 +39,7 @@ if (!variable_global_exists("fullscreen")) global.fullscreen = window_get_fullsc
 if (!variable_global_exists("achievements")) global.achievements = true;
 if (!variable_global_exists("contrast_value")) global.contrast_value = 1.0;
 
-resolutions = [[1280, 720], [1600, 900], [1920, 1080]];
+resolutions = [[1080, 768], [1600, 900], [1920, 1080]];
 
 ini_open("configuracoes.ini");
 global.fullscreen = ini_read_real("Video", "Fullscreen", global.fullscreen);
@@ -82,13 +82,12 @@ menu_sub_state = "main";
 key_z = false;
 box_selected_opt = 0;
 sub_menu_idx = 0;
-global.puzzle_active = false;
-global.puzzle_solved = false;
 
-base_atk = 10;
-base_def = 5;
-hp_actual = 20;
-hp_max = 20;
+
+base_atk = global.atk;
+base_def = global.def;
+hp_actual = global.hp;
+hp_max = global.hp_max;
 
 stat_atk = base_atk;
 stat_def = base_def;
@@ -107,8 +106,4 @@ combo_max_time = 60;
 is_attacking = false;
 attack_damage_display = 0;
 
-inventory = [
-    { name: "STICK", type: "weapon", sprite: sprPlayerIdle, value: 2, info: "+2 ATK" },
-    { name: "BANDAGE", type: "shield", sprite: sprPlayerIdle, value: 1, info: "+1 DEF" },
-    { name: "BREAD", type: "heal", sprite: sprPlayerIdle, value: 10, info: "HEAL 10 HP" }
-];
+inventory = global.inventory

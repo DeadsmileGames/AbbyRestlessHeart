@@ -1,39 +1,40 @@
-var gui_w = display_get_gui_width();
-var gui_h = display_get_gui_height();
+gpu_set_texfilter(false);
 
-var margin = 40;
-var base_x = gui_w / 2;
-var base_y = gui_h - margin;
-draw_set_alpha(alpha * 0.70);
-draw_set_color(c_black);
-draw_rectangle(0, base_y - 100, gui_w, gui_h, false);
-draw_set_alpha(1);
-draw_set_alpha(alpha);
+var _display_h_style = display_get_gui_height();
 
-var x_pos = base_x + slide_offset;
+var _pad_x_style = 50;
+var _anchor_y_style = _display_h_style - 60;
+var _calculated_x_style = _pad_x_style + slide_offset;
+
+draw_set_halign(fa_left);
+
+if (chapter_number >= 0) {
+    var _offset_chap_y_style = _anchor_y_style - 50;
+    draw_set_font(global.fonteNormal);
+    
+    if (shadow) {
+        draw_set_color(c_black);
+        draw_set_alpha(alpha * 0.5);
+        draw_text(_calculated_x_style + 2, _offset_chap_y_style + 2, "CHAPTER " + string(chapter_number));
+    }
+    
+    draw_set_color(c_aqua);
+    draw_set_alpha(alpha * 0.8);
+    draw_text(_calculated_x_style, _offset_chap_y_style, "CHAPTER " + string(chapter_number));
+}
+
+draw_set_font(global.fonteTitulo);
+draw_set_valign(fa_bottom);
+
 if (shadow) {
     draw_set_color(c_black);
-    draw_set_alpha(alpha * 0.4);
-    draw_set_font(global.fonteNormal);
-    draw_set_halign(fa_center);
-    draw_set_valign(fa_bottom);
-    draw_text(x_pos + 4, base_y + 4, text);
-    draw_set_alpha(1);
+    draw_set_alpha(alpha * 0.5);
+    draw_text(_calculated_x_style + 3, _anchor_y_style + 3, string_upper(text));
 }
 
 draw_set_color(color);
 draw_set_alpha(alpha);
-draw_set_font(global.fonteNormal);
-draw_set_halign(fa_center);
-draw_set_valign(fa_bottom);
-draw_text(x_pos, base_y, text);
-if (chapter_number >= 0) {
-    draw_set_font(global.fonteNormal);
-    draw_set_color(c_white);
-    draw_set_alpha(alpha * 0.7);
-    draw_set_halign(fa_center);
-    draw_set_valign(fa_bottom);
-    draw_text(x_pos, base_y - 40, "CHAPTER " + string(chapter_number));
-}
+draw_text(_calculated_x_style, _anchor_y_style, string_upper(text));
 
-draw_set_alpha(1);
+draw_set_alpha(1.0);
+draw_set_color(c_white);

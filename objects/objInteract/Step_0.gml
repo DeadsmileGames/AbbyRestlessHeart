@@ -1,6 +1,10 @@
 if (cooldown > 0) cooldown--;
 
 if (!instance_exists(objPlayer)) exit;
+if (instance_exists(objBattleManager)) {
+	exit;
+}
+
 
 var dist = point_distance(x, y, objPlayer.x, objPlayer.y);
 

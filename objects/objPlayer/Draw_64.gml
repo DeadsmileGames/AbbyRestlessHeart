@@ -148,7 +148,7 @@ if (config_tab == 1) {
 if (config_tab == 2) {
     if (menu_sub_state == "main") {
         draw_set_halign(fa_center);
-        var main_opts = ["OPTIONS", "CONTROLS", "GAME", "EXIT"];
+        var main_opts = ["OPTIONS", "CONTROLS", "GAME", "EXIT TO DESKTOP"];
         for(var i = 0; i < 4; i++) {
             if (config_idx == i) {
                 draw_set_color(c_white);

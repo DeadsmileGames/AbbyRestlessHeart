@@ -1,4 +1,5 @@
 if (instance_exists(objDialogue)) exit;
+if (instance_exists(objShowLocal)) exit;
 if (instance_exists(objPlayer)) {
 	if (objPlayer.config_open) exit;
 }
@@ -7,11 +8,16 @@ if (instance_exists(objSleepTrigger)) {
 	if (objSleepTrigger.sleeping) exit;
 }
 
+if (instance_exists(objBattleManager)) {
+	 exit;
+}
+
+
 var gui_w = display_get_gui_width();
 var gui_h = display_get_gui_height();
 
 var obj_box_w = 280;
-var obj_box_x = gui_w - obj_box_w - 24;
+var obj_box_x = gui_w - obj_box_w - 24
 var obj_box_y = 24;
 
 var obj_text = global.current_objective;
@@ -49,12 +55,12 @@ draw_set_valign(fa_top);
 draw_set_color(make_color_rgb(180, 180, 180));
 draw_text(obj_box_x + 12, obj_box_y + 6, "OBJECTIVE");
 
+draw_set_font(font_normal);
 draw_set_color(c_black);
 draw_set_alpha(0.3);
 draw_text(obj_box_x + 13, obj_box_y + 28, obj_text);
 draw_set_alpha(1);
 
-draw_set_font(font_normal);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_color(c_white);

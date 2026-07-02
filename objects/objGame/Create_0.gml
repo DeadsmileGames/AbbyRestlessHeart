@@ -1,4 +1,14 @@
-global.isMila = false
+timer = 0;
+state = 0;
+alpha = 0;
+particles = [];
+show_text = false;
+text_alpha = 0;
+version_alpha = 0;
+credits_alpha = 0;
+firework_particles = [];
+explosion_particles = [];
+game_version = "v0.11b";
 
 enum MENU_STATE_2 { MAIN, SETTINGS, CREDITS }
 current_state = MENU_STATE_2.MAIN;
@@ -10,9 +20,10 @@ text_fade_speed = 0.02;
 text_alpha = 0;
 current_text_index = 0;
 choice_index = 0;
-global.history_answers = array_create(7, -1);
+
 var user_name = string_upper(environment_get_variable("USERNAME"));
 if (user_name == "") user_name = "player";
+
 history_texts = [
     "Today was an absolute nightmare.",
     "I just wanted to get back to my room in one piece.",
@@ -44,6 +55,7 @@ history_texts = [
     "I understand, " + string(user_name) + ".",
     "Tomorrow will be a better DAY."
 ];
+
 history_choices = [
     ["Yes, every day.", "Only sometimes.", "No, not really."],
     ["Always.", "When it gets dark.", "Never."],
@@ -53,6 +65,7 @@ history_choices = [
     ["I forgot it.", "It is fading.", "Yes, clearly."],
     ["Yes, like a machine.", "I am trying not to.", "No, I am living."]
 ];
+
 game_replies = [
     ["A suffocating armor... I know.", "Be careful, those moments can expand.", "I'm glad your body still feels light."],
     ["The worst kind of isolation is around others.", "The shadows have a way of doing that.", "Keep holding onto that connection."],
@@ -62,6 +75,7 @@ game_replies = [
     ["The darkness is a cruel thief.", "Then try to remember before it slips away.", "Never forget how warm it feels."],
     ["Like clockwork without a soul.", "Breaking the cycle takes everything.", "Live fully, while you still can."]
 ];
+
 current_chapter = 1;
 show_menu_buttons = false;
 menu_index = 0;
@@ -79,12 +93,14 @@ shake_load = 0;
 error_flash_load = 0;
 shatter_particles = [];
 game_starting = false;
+
 if (!variable_global_exists("vol_bgm")) global.vol_bgm = 1.0;
 if (!variable_global_exists("vol_sfx")) global.vol_sfx = 1.0;
 if (!variable_global_exists("fullscreen")) global.fullscreen = window_get_fullscreen();
 if (!variable_global_exists("achievements")) global.achievements = true;
 if (!variable_global_exists("contrast_value")) global.contrast_value = 1.0;
-resolutions = [[1280, 720], [1600, 900], [1920, 1080]];
+
+resolutions = [[1080, 768], [1600, 900], [1920, 1080]];
 controls = [
     ["MOVE LEFT",  vk_left],
     ["MOVE RIGHT", vk_right],
@@ -94,6 +110,7 @@ controls = [
     ["MOVE UP",    vk_up],
     ["MOVE DOWN",  vk_down]
 ];
+
 if (file_exists("configuracoes.ini")) {
     ini_open("configuracoes.ini");
     global.fullscreen = ini_read_real("Video", "Fullscreen", global.fullscreen);
@@ -108,6 +125,7 @@ if (file_exists("configuracoes.ini")) {
     resolution_index = 0;
     text_scale = 1.0;
 }
+
 global.control_list = controls;
 window_set_fullscreen(global.fullscreen);
 var res = resolutions[resolution_index];
@@ -129,9 +147,10 @@ for (var i = 0; i < max_pixels; i++) {
         size: choose(5, 6)
     };
 }
+
 is_transitioning = false;
 slice_count = 8;
-slice_max_width = 0;
+slice_max_width = display_get_gui_width();
 slice_widths = array_create(slice_count, 0);
 slice_speeds = array_create(slice_count, 0);
 for (var i = 0; i < slice_count; i++) slice_speeds[i] = random_range(15, 30);

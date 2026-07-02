@@ -5,6 +5,13 @@ if (instance_exists(objDialogue)) {
     exit; 
 }
 
+if (instance_exists(objBattleManager)) {
+    hspd = 0;
+    vspd = 0;
+    state = "idle";
+    exit;
+}
+
 if (instance_exists(objSleepTrigger)) {
 	if (objSleepTrigger.sleeping) {
 	    hspd = 0;
@@ -12,6 +19,13 @@ if (instance_exists(objSleepTrigger)) {
 	    state = "idle"; 
 	    exit; 
 	}
+}
+
+if (instance_exists(objShowLocal)) {
+	    hspd = 0;
+	    vspd = 0;
+	    state = "idle"; 
+	    exit; 
 }
 
 if (instance_exists(objCh0101)) {
@@ -40,7 +54,7 @@ var move_down  = keyboard_check(vk_down);
 var key_shift  = keyboard_check_pressed(vk_shift);
 var key_z      = keyboard_check_pressed(controls[2][1]);
 var key_x      = keyboard_check_pressed(controls[3][1]);
-var key_menu   = keyboard_check_pressed(ord("C")) || keyboard_check_pressed(vk_escape);
+var key_menu   = keyboard_check_pressed(ord("C"));
 
 var play_beep = false;
 
@@ -113,15 +127,8 @@ if (!config_open && config_target_y == -400) {
             else if (hspd > 0) dir = 5;
             if (hspd != 0 || vspd != 0) {
                     state = "walk";
-                    if (!audio_is_playing(Walk)) {
-                        var som_Walk = audio_play_sound(Walk, 10, false);
-                        audio_sound_gain(som_Walk, global.vol_sfx*10, 0);
-                    }
                 } else {
                     state = "idle";
-                    if (audio_is_playing(Walk)) {
-                        audio_stop_sound(Walk)
-                    }
                 }
         }
         
