@@ -8,4 +8,4 @@ version_alpha = 0;
 credits_alpha = 0;
 firework_particles = [];
 explosion_particles = [];
-game_version = "v0.11b";
+game_version = "v0.12b";

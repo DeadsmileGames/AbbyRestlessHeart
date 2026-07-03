@@ -2,9 +2,6 @@ started_story = false;
 alarm_triggered = false;
 scr_set_objective("Go to sleep");
 
-if (audio_is_playing(StartMenu)) {
-    audio_stop_sound(StartMenu)
-}
 
 if (!audio_is_playing(AbbyMind)) {
     global.music_id = audio_play_sound(AbbyMind, 10, true);

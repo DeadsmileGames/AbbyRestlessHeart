@@ -16,6 +16,9 @@ if (menu_sub_state == "submenu_load_info") {
             var _f = file_text_open_read("save.json");
             var _json = file_text_read_string(_f);
             file_text_close(_f);
+			if (audio_is_playing(StartMenu)) {
+			    audio_stop_sound(StartMenu)
+			}
             global.load_data = json_parse(_json);
             with (instance_create_depth(0, 0, -10000, objTransition)) {
                 target_room = asset_get_index(global.load_data.room_name);
@@ -123,6 +126,10 @@ if (!config_open && !save_menu_open && !is_transitioning) {
             switch (menu_index) {
                 case 0:
                     if (!instance_exists(objIntroSequence)) {
+						if (audio_is_playing(StartMenu)) {
+						    audio_stop_sound(StartMenu)
+						}
+
                         game_starting = true;
                         with (instance_create_depth(0, 0, -10000, objIntroSequence)) {}
                     }
