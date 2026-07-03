@@ -1,3 +1,9 @@
+//Chapter controls
+global.ChapterOneIsComplete = false;
+global.ChapterTwoIsComplete = false;
+global.ChapterThreeIsComplete = false;
+global.ChapterFourIsComplete = false;
+
 //player
 global.isMila = false
 global.hp = 20

@@ -14,7 +14,7 @@ draw_set_color(c_black);
 draw_set_alpha(0.7);
 draw_rectangle(bx1 + 10, by1 + 10, bx2 + 10, by2 + 10, false);
 draw_set_alpha(1);
-
+ 
 draw_set_color(c_black);
 draw_rectangle(bx1, by1, bx2, by2, false);
 

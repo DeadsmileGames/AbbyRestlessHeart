@@ -18,8 +18,8 @@ if (text_alpha > 0) {
     draw_text(base_x, base_y - 40, "INSOMNIA");
     
     draw_set_font(global.fonteTitulo);
-    draw_set_color(c_aqua);
-    draw_text(base_x, base_y + 30, "CHAPTER " + string(global.current_chapter));
+    draw_set_color(c_red);
+    draw_text(base_x, base_y + 30, "CHAPTER " + "5");
     draw_set_alpha(1);
 }
 

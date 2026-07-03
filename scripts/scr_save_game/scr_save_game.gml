@@ -4,8 +4,8 @@ function scr_save_game() {
         if (instance_exists(objAbbyBedroom)) {
             _story_started = objAbbyBedroom.started_story;
         } else if (instance_exists(objCh0101)) {
-			_story_started = objCh0101.started_story;
-		}
+            _story_started = objCh0101.started_story;
+        }
         
         var _data = {
             room_name: room_get_name(room),
@@ -19,6 +19,10 @@ function scr_save_game() {
             equipped_weapon: objPlayer.equipped_weapon,
             equipped_shield: objPlayer.equipped_shield,
             started_story: _story_started,
+            ChapterOneIsComplete: global.ChapterOneIsComplete,
+            ChapterTwoIsComplete: global.ChapterTwoIsComplete,
+            ChapterThreeIsComplete: global.ChapterThreeIsComplete,
+            ChapterFourIsComplete: global.ChapterFourIsComplete
         };
         
         var _f = file_text_open_write("save.json");
@@ -26,3 +30,4 @@ function scr_save_game() {
         file_text_close(_f);
     }
 }
+

@@ -142,9 +142,9 @@ if (!config_open && !save_menu_open && !is_transitioning) {
         if (key_z) {
             switch (menu_index) {
                 case 0:
-                    if (!instance_exists(objIntroSequence)) {
+                    if (!instance_exists(objIntroSequenceCh2)) {
                         game_starting = true;
-                        with (instance_create_depth(0, 0, -10000, objIntroSequence)) {}
+                        with (instance_create_depth(0, 0, -10000, objIntroSequenceCh2)) {}
                     }
                     play_beep = true;
                     break;
