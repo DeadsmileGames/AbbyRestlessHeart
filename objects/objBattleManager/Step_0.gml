@@ -50,6 +50,9 @@ if (battle_state == "gameover_anim") {
     } else {
         fade_alpha += 0.04;
         if (fade_alpha >= 1) {
+			if (audio_is_playing(ItsTimeForABattle)) {
+			    audio_stop_sound(ItsTimeForABattle)
+			}
             room_goto(rm_GameOver);
         }
     }
@@ -165,7 +168,7 @@ if (battle_state == "minigame") {
     if (_key_z) {
         var _center = mg_bar_width / 2;
         var _dist = abs(mg_cursor_x - _center);
-        var _base_dmg = selected_attack.dmg;
+        var _base_dmg = selected_attack.dmg + global.atk;
         var _final_dmg = _base_dmg;
         var _mod_text = "";
         
@@ -176,6 +179,10 @@ if (battle_state == "minigame") {
         else { _final_dmg = round(_base_dmg * 0.50); _mod_text = "BAD TIMING!"; }
         
         enemy_hp -= _final_dmg;
+		if (!audio_is_playing(Attack)) {
+            var som_attack = audio_play_sound(Attack, 10, false);
+            audio_sound_gain(som_attack, global.vol_sfx, 0);
+        }
        
         enemy_hit_timer = 25; 
         
@@ -245,15 +252,14 @@ if (battle_state == "win_screen") {
     text_timer++;
     if (text_timer == 1) {
         battle_text = "The " + enemy_name + " was defeated!\n";
+		if (!audio_is_playing(Victory)) {
+	      var som_win = audio_play_sound(Victory, 10, false);
+	      audio_sound_gain(som_win, global.vol_sfx, 0);
+	    }
         
         var _roll = irandom(99); 
-        if (_roll < 50) {
-            objPlayer.base_atk += 1;
-            objPlayer.stat_atk += 1;
-            battle_text += "Reward: +1 ATK permanently!";
-        } 
-        else if (_roll < 75) {
-            array_push(objPlayer.inventory, { 
+        if (_roll < 2) {
+			array_push(objPlayer.inventory, { 
                 name: "MYSTIC HEAL", 
                 type: "heal", 
                 value: 15, 
@@ -261,6 +267,11 @@ if (battle_state == "win_screen") {
                 sprite: sprPlayerIdle
             });
             battle_text += "Reward obtained: MYSTIC HEAL!";
+        } 
+        else if (_roll < 5) {
+            objPlayer.base_atk += 1;
+            objPlayer.stat_atk += 1;
+            battle_text += "Reward: +1 ATK permanently!";
         } 
         else {
             objPlayer.hp_actual = min(objPlayer.hp_max, objPlayer.hp_actual + 5);

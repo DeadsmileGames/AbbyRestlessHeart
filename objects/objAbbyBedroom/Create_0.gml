@@ -3,12 +3,6 @@ alarm_triggered = false;
 scr_set_objective("Go to sleep");
 
 
-if (!audio_is_playing(AbbyMind)) {
-    global.music_id = audio_play_sound(AbbyMind, 10, true);
-    audio_sound_gain(global.music_id, global.vol_bgm, 0);
-}
-
-
 
 if (variable_global_exists("load_data") && global.load_data != undefined) {
     if (variable_struct_exists(global.load_data, "started_story")) {

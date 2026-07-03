@@ -54,14 +54,26 @@ if (save_menu_open) {
     if (keyboard_check_pressed(ord("X"))) { save_menu_open = false; }
     
     if (keyboard_check_pressed(ord("Z"))) {
-        if (file_exists("save.json")) {
-            scr_load_game("save.json");
-            save_menu_open = false;
-        } else {
-            save_menu_open = false;
-            shattered_try = true;
+    if (file_exists("save.json")) {
+        if (audio_is_playing(global.music_id)) {
+            audio_stop_sound(global.music_id);
         }
+        
+        scr_load_game("save.json");
+        
+        if (instance_exists(objMusicManager)) {
+            with (objMusicManager) { 
+                current_track = -1;
+                event_perform(ev_other, ev_room_start); 
+            }
+        }
+        
+        save_menu_open = false;
+    } else {
+        save_menu_open = false;
+        shattered_try = true;
     }
+}
 }
 
 if (shake_try > 0) shake_try = max(0, shake_try - 2);

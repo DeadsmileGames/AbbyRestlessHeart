@@ -31,6 +31,7 @@ for (var i = 0; i < 60; i++) {
     });
 }
 
+
 is_transitioning = false;
 fade_alpha = 0;
 transition_timer = 0;

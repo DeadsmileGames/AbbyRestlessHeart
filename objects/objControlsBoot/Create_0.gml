@@ -29,10 +29,3 @@ credits_list = [
 
 title_text = "INSOMNIA v0.12b (C) SOMIARI GAMES";
 target_menu_room = rm_Intro;
-
-
-
-if (!audio_is_playing(StartMenu)) {
-    global.music_id = audio_play_sound(StartMenu, 10, true);
-    audio_sound_gain(global.music_id, global.vol_bgm, 0);
-}

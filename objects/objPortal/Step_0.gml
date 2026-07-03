@@ -11,8 +11,5 @@ if (state == "idle" && !transitioning) {
         image_speed = 0.2;
         image_index = 0;
         show_prompt = false;
-		if (audio_is_playing(MazeOfMemories)) {
-		    audio_stop_sound(MazeOfMemories)
-		}
     }
 }

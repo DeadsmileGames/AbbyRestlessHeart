@@ -61,9 +61,14 @@ if (is_choice_mode && !is_typing) {
     
     var opt1_y = choice_y_start;
     if (choice_selected == 0) {
+        var _text_half_width_1 = (string_width(choice_text_1) * 1.3) / 2;
+        var _indicator_left_x_1 = center_x - _text_half_width_1 - 25;
+        var _indicator_right_x_1 = center_x + _text_half_width_1 + 25;
+        
         draw_set_color(c_yellow);
-        draw_text_transformed(center_x - 50, opt1_y, ">", 1.8, 1.8, 0);
+        draw_text_transformed(_indicator_left_x_1, opt1_y, ">", 1.8, 1.8, 0);
         draw_text_transformed(center_x, opt1_y, choice_text_1, 1.3, 1.3, 0);
+        draw_text_transformed(_indicator_right_x_1, opt1_y, "<", 1.8, 1.8, 0);
     } else {
         draw_set_color(c_white);
         draw_text_transformed(center_x, opt1_y, choice_text_1, 1.3, 1.3, 0);
@@ -71,9 +76,14 @@ if (is_choice_mode && !is_typing) {
     
     var opt2_y = choice_y_start + choice_spacing;
     if (choice_selected == 1) {
+        var _text_half_width_2 = (string_width(choice_text_2) * 1.3) / 2;
+        var _indicator_left_x_2 = center_x - _text_half_width_2 - 25;
+        var _indicator_right_x_2 = center_x + _text_half_width_2 + 25;
+        
         draw_set_color(c_yellow);
-        draw_text_transformed(center_x - 50, opt2_y, ">", 1.8, 1.8, 0);
+        draw_text_transformed(_indicator_left_x_2, opt2_y, ">", 1.8, 1.8, 0);
         draw_text_transformed(center_x, opt2_y, choice_text_2, 1.3, 1.3, 0);
+        draw_text_transformed(_indicator_right_x_2, opt2_y, "<", 1.8, 1.8, 0);
     } else {
         draw_set_color(c_white);
         draw_text_transformed(center_x, opt2_y, choice_text_2, 1.3, 1.3, 0);

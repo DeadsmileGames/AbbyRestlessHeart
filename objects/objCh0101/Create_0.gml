@@ -5,15 +5,6 @@ CreateInteract(1490, 318, "???", "HELLOOOO!!!!! Welcome to your mind, Mila!!!!",
 CreateInteract(2460, 335, "???", "OOOMG, IT'S RELLY YOU MILA!!!!!", c_white, 50);
 CreateInteract(3120, 378, "???", "OOOMG, IT'S RELLY YOU MILA!!!!!", c_white, 50);
 
-if (audio_is_playing(AbbyMind)) {
-    audio_stop_sound(AbbyMind)
-}
-
-if (!audio_is_playing(MazeOfMemories)) {
-    global.music_id = audio_play_sound(MazeOfMemories, 10, true);
-    audio_sound_gain(global.music_id, global.vol_bgm, 0);
-}
-
 if (variable_global_exists("load_data") && global.load_data != undefined) {
     if (variable_struct_exists(global.load_data, "started_story")) {
         started_story = global.load_data.started_story;

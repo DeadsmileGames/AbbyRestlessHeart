@@ -50,26 +50,18 @@ if (current_text_index < array_length(history_texts)) {
         draw_set_color(c_aqua);
         draw_text_transformed(start_x + w1 + (w2/2), gui_h / 2, p2, text_scale, text_scale, 0);
     } else if (is_question) {
-        var box_w = 600;
-        var box_h = 240;
-        var bx1 = base_x - (box_w / 2);
-        var by1 = base_y - (box_h / 2) - 30;
-        var bx2 = base_x + (box_w / 2);
-        var by2 = by1 + box_h;
-        
-        draw_set_color(c_black); draw_rectangle(bx1, by1, bx2, by2, false);
-        draw_set_color(c_aqua);  draw_rectangle(bx1, by1, bx2, by2, true);
+        var by1 = base_y - 120 - 30;
         
         draw_set_color(c_aqua);
-        draw_text_ext_transformed(base_x, by1 + 45, history_texts[current_text_index], 28, box_w - 60, text_scale, text_scale, 0);
+        draw_text_ext_transformed(base_x, by1 + 45, history_texts[current_text_index], 28, gui_w - 200, text_scale, text_scale, 0);
         
         var q_idx = (current_text_index - 12) / 2;
         var choices = history_choices[q_idx];
-        var choice_y_start = by1 + 120;
+        var choice_y_start = by1 + 140;
         for (var i = 0; i < 3; i++) {
             draw_set_color(choice_index == i ? c_yellow : c_white);
             var choice_label = choice_index == i ? "> " + choices[i] + " <" : choices[i];
-            draw_text_transformed(base_x, choice_y_start + (i * 35), choice_label, text_scale, text_scale, 0);
+            draw_text_transformed(base_x, choice_y_start + (i * 40), choice_label, text_scale, text_scale, 0);
         }
     } else if (is_game_reply || current_text_index == 26 || current_text_index == 27) {
         draw_set_color(c_aqua);

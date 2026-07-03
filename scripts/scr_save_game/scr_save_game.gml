@@ -11,14 +11,14 @@ function scr_save_game() {
             room_name: room_get_name(room),
             x: objPlayer.x,
             y: objPlayer.y,
-            hp: objPlayer.hp_actual,
-            hp_max: objPlayer.hp_max,
-            atk: objPlayer.stat_atk,
-            def: objPlayer.stat_def,
-            inventory: objPlayer.inventory,
+            hp: global.hp,
+            hp_max: global.hp_max,
+            atk: global.atk,
+            def: global.def,
+            inventory: global.inventory,
             equipped_weapon: objPlayer.equipped_weapon,
             equipped_shield: objPlayer.equipped_shield,
-            started_story: _story_started
+            started_story: _story_started,
         };
         
         var _f = file_text_open_write("save.json");

@@ -24,7 +24,7 @@ if (variable_global_exists("load_data") && global.load_data != undefined) {
     if (variable_struct_exists(_data, "inventory")) inventory = _data.inventory;
     if (variable_struct_exists(_data, "equipped_weapon")) equipped_weapon = _data.equipped_weapon;
     if (variable_struct_exists(_data, "equipped_shield")) equipped_shield = _data.equipped_shield;
-    
+	
     if (variable_struct_exists(_data, "started_story") && instance_exists(objAbbyBedroom)) {
         objAbbyBedroom.started_story = _data.started_story;
     } else if (variable_struct_exists(_data, "started_story") && instance_exists(objAbbyBedroom)) {

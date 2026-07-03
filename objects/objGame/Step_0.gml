@@ -16,10 +16,27 @@ if (menu_sub_state == "submenu_load_info") {
             var _f = file_text_open_read("save.json");
             var _json = file_text_read_string(_f);
             file_text_close(_f);
-			if (audio_is_playing(StartMenu)) {
-			    audio_stop_sound(StartMenu)
-			}
             global.load_data = json_parse(_json);
+            
+            if (variable_global_exists("music_id")) {
+                if (audio_is_playing(global.music_id)) {
+                    audio_stop_sound(global.music_id);
+                    global.music_id = -1;
+                }
+            }
+            
+            if (instance_exists(objMusicManager)) {
+                with (objMusicManager) {
+                    if (audio_is_playing(global.music_id)) {
+                        audio_stop_sound(global.music_id);
+                    }
+                    global.music_id = -1;
+                    current_track = -1;
+                    target_track = -1;
+                    fade_state = "idle";
+                }
+            }
+            
             with (instance_create_depth(0, 0, -10000, objTransition)) {
                 target_room = asset_get_index(global.load_data.room_name);
             }
@@ -126,10 +143,6 @@ if (!config_open && !save_menu_open && !is_transitioning) {
             switch (menu_index) {
                 case 0:
                     if (!instance_exists(objIntroSequence)) {
-						if (audio_is_playing(StartMenu)) {
-						    audio_stop_sound(StartMenu)
-						}
-
                         game_starting = true;
                         with (instance_create_depth(0, 0, -10000, objIntroSequence)) {}
                     }

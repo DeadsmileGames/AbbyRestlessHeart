@@ -1,8 +1,8 @@
 //player
 global.isMila = false
 global.hp = 20
-global.atk = 5
-global.def = 5
+global.atk = 1
+global.def = 1
 global.hp_max = 20
 global.inventory = [
 	{ name: "STICK", type: "weapon", sprite: sprPlayerIdle, value: 2, info: "+2 ATK" },
