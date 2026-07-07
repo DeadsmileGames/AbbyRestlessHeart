@@ -26,7 +26,7 @@ if (current_state == MENU_STATE.MAIN) {
     draw_set_font(global.fonteLegenda);
     draw_set_color(c_gray);
     draw_set_alpha(menu_alpha);
-    draw_text(base_x, gui_h - 20, "v0.12b");
+    draw_text(base_x, gui_h - 20, "v0.15b");
 } else if (current_state == MENU_STATE.SETTINGS) {
     var total_options = array_length(settings_options);
     var start_y = gui_h - 110 - ((total_options - 2) * spacing);

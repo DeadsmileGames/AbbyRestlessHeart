@@ -4,6 +4,12 @@ if (instance_exists(objDialogue)) {
     exit;
 }
 
+if (instance_exists(objMinigamePuzzle2) || instance_exists(objMinigamePuzzle) || instance_exists(objMinigamePuzzle3)) {
+    hspd = 0;
+    vspd = 0;
+    exit; 
+}
+
 if (instance_exists(objPlayer)) {
     if (objPlayer.config_open) {
         hspd = 0;
@@ -11,6 +17,14 @@ if (instance_exists(objPlayer)) {
         exit;
     }
 }
+
+if (instance_exists(objInteractSystem)) {
+    hspd = 0;
+    vspd = 0;
+    state = "idle";
+    exit;
+}
+
 
 if (instance_exists(objBattleManager)) {
     hspd = 0;

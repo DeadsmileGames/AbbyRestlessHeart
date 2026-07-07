@@ -17,8 +17,8 @@ switch (room) {
         _target_room_track = AbbyMind;
         break;
         
-    case rm_MazeOfMemories:
-        _target_room_track = MazeOfMemories;
+    case rm_SweetHome:
+        _target_room_track = SweetHome;
         break;
         
     default:

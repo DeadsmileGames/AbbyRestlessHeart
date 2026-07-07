@@ -36,14 +36,24 @@ switch (fade_state) {
             var _current_vol = audio_sound_get_gain(global.music_id);
             _current_vol += fade_speed;
             
-            if (_current_vol >= music_volume) {
-                audio_sound_gain(global.music_id, music_volume, 0);
+            var _target_volume = global.vol_bgm;
+            
+            if (_current_vol >= _target_volume) {
+                audio_sound_gain(global.music_id, _target_volume, 0);
                 fade_state = "idle";
             } else {
                 audio_sound_gain(global.music_id, _current_vol, 0);
             }
         } else {
             fade_state = "idle";
+        }
+        break;
+        
+    case "idle":
+        if (global.music_id != -1 && audio_is_playing(global.music_id)) {
+            if (audio_sound_get_gain(global.music_id) != global.vol_bgm) {
+                audio_sound_gain(global.music_id, global.vol_bgm, 0);
+            }
         }
         break;
 }

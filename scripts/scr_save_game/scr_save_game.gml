@@ -19,6 +19,11 @@ function scr_save_game() {
             equipped_weapon: objPlayer.equipped_weapon,
             equipped_shield: objPlayer.equipped_shield,
             started_story: _story_started,
+			bgm: global.vol_bgm,
+			sfx: global.vol_sfx,
+			keyYellow: global.keyYellow,
+			keyGreen: global.keyGreen,
+			keyBlue: global.keyBlue,
         };
         
         var _f = file_text_open_write("save.json");

@@ -21,3 +21,7 @@ if (!instance_exists(objGame)) {
 	    esc_hold_timer = 0;
 	}
 }
+
+if (keyboard_check_pressed(vk_f6)) {
+    global.crt_active = !global.crt_active;
+}

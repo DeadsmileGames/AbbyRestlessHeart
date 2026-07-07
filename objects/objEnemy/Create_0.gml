@@ -1,7 +1,7 @@
 hspd = 0;
 vspd = 0;
 spd = 2.2;
-chase_radius = 300;
+chase_radius = 250;
 
 enemy_name = "Vigil Delusion";
 enemy_hp = 10;

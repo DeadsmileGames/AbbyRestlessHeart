@@ -33,27 +33,25 @@ function scr_show_location(_text, _color, _shadow, _chapter_number) {
     }
 }
 
-function CreateInteract(_x, _y, _title, _text, _color, _dist) {
-    show_debug_message("CreateInteract chamado! X:" + string(_x) + " Y:" + string(_y));
+function CreateInteract(_x, _y, _pages, _dist) {
     with (instance_create_layer(_x, _y, "Instances", objInteract)) {
-        interact_title = _title;
-        interact_text = _text;
-        interact_color = _color;
+        interact_pages = _pages;
         trigger_distance = _dist;
+        is_triggered = false;
+        show_prompt = false;
+        cooldown = 0;
+        debug_mode1 = false;
     }
 }
 
-function Interact(_title, _text, _color) {
+function Interact(_pages) {
     if (!instance_exists(objInteractSystem)) {
         instance_create_depth(0, 0, -1000, objInteractSystem);
     }
-
     if (!variable_global_exists("interact_queue")) global.interact_queue = [];
-    array_push(global.interact_queue, {
-        title: _title,
-        text: _text,
-        color: _color
-    });
+    for (var i = 0; i < array_length(_pages); i++) {
+        array_push(global.interact_queue, _pages[i]);
+    }
 }
 
 function StartPuzzle(_x, _y) {

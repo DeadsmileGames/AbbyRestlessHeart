@@ -2,6 +2,15 @@ if (instance_exists(objDialogue)) {
     hspd = 0;
     vspd = 0;
     state = "idle"; 
+    if (audio_is_playing(Walk)) audio_stop_sound(Walk);
+    exit; 
+}
+
+if (instance_exists(objMinigamePuzzle2) || instance_exists(objMinigamePuzzle) || instance_exists(objMinigamePuzzle3)) {
+    hspd = 0;
+    vspd = 0;
+    state = "idle"; 
+    if (audio_is_playing(Walk)) audio_stop_sound(Walk);
     exit; 
 }
 
@@ -9,38 +18,51 @@ if (instance_exists(objBattleManager)) {
     hspd = 0;
     vspd = 0;
     state = "idle";
+    if (audio_is_playing(Walk)) audio_stop_sound(Walk);
+    exit;
+}
+
+if (instance_exists(objInteractSystem)) {
+    hspd = 0;
+    vspd = 0;
+    state = "idle";
+    if (audio_is_playing(Walk)) audio_stop_sound(Walk);
     exit;
 }
 
 if (instance_exists(objSleepTrigger)) {
-	if (objSleepTrigger.sleeping) {
-	    hspd = 0;
-	    vspd = 0;
-	    state = "idle"; 
-	    exit; 
-	}
+    if (objSleepTrigger.sleeping) {
+        hspd = 0;
+        vspd = 0;
+        state = "idle"; 
+        if (audio_is_playing(Walk)) audio_stop_sound(Walk);
+        exit; 
+    }
 }
 
 if (instance_exists(objShowLocal)) {
-	    hspd = 0;
-	    vspd = 0;
-	    state = "idle"; 
-	    exit; 
+        hspd = 0;
+        vspd = 0;
+        state = "idle"; 
+        if (audio_is_playing(Walk)) audio_stop_sound(Walk);
+        exit; 
 }
 
 if (instance_exists(objCh0101)) {
-	if (!objCh0101.started_story) {
-	    hspd = 0;
-	    vspd = 0;
-	    state = "idle"; 
-	    exit; 
-	}
+    if (!objCh0101.started_story) {
+        hspd = 0;
+        vspd = 0;
+        state = "idle"; 
+        if (audio_is_playing(Walk)) audio_stop_sound(Walk);
+        exit; 
+    }
 }
 
 if (global.puzzle_active) {
     hspd = 0;
     vspd = 0;
     state = "idle";
+    if (audio_is_playing(Walk)) audio_stop_sound(Walk);
     exit;
 }
 
@@ -61,7 +83,13 @@ var play_beep = false;
 if (key_menu && !shattered_continue && (menu_sub_state == "main" || menu_sub_state == "submenu_options" || menu_sub_state == "submenu_game" || menu_sub_state == "submenu_controls" || menu_sub_state == "submenu_save_confirm" || menu_sub_state == "submenu_load_info")) {
     config_open = !config_open;
     config_target_y = config_open ? 0 : -400;
-    if (config_open) { config_idx = 0; config_tab = 0; config_cooldown = 5; menu_sub_state = "main"; }
+    if (config_open) { 
+        config_idx = 0; 
+        config_tab = 0; 
+        config_cooldown = 5; 
+        menu_sub_state = "main"; 
+        if (audio_is_playing(Walk)) audio_stop_sound(Walk);
+    }
     play_beep = true;
 }
 
@@ -74,6 +102,7 @@ if (!is_dead && hp_actual <= 0) {
     hspd = 0;
     vspd = 0;
     death_timer = 0;
+    if (audio_is_playing(Walk)) audio_stop_sound(Walk);
 }
 
 if (is_dead) {
@@ -92,6 +121,7 @@ if (!config_open && config_target_y == -400) {
         if (key_shift && !is_dashing && _len > 0) {
             is_dashing = true;
             dash_timer = dash_dur;
+            if (audio_is_playing(Walk)) audio_stop_sound(Walk);
             if (!audio_is_playing(Dash)) {
                 var som_Dash = audio_play_sound(Dash, 10, false);
                 audio_sound_gain(som_Dash, global.vol_sfx, 0);
@@ -125,11 +155,19 @@ if (!config_open && config_target_y == -400) {
             else if (hspd < 0) dir = 1;
             else if (vspd < 0) dir = 3;
             else if (hspd > 0) dir = 5;
+            
             if (hspd != 0 || vspd != 0) {
-                    state = "walk";
-                } else {
-                    state = "idle";
+                state = "walk";
+                if (!audio_is_playing(Walk)) {
+                    audio_play_sound(Walk, 1, true);
                 }
+                audio_sound_gain(Walk, global.vol_sfx, 0);
+            } else {
+                state = "idle";
+                if (audio_is_playing(Walk)) {
+                    audio_stop_sound(Walk);
+                }
+            }
         }
         
         if (place_meeting(x + hspd, y, obj)) {
@@ -155,6 +193,8 @@ if (!config_open && config_target_y == -400) {
     y = clamp(y, half_h, room_height - half_h);
     anim_frame += anim_speed;
 } else if (config_open && config_target_y == 0 && config_cooldown == 0) {
+    if (audio_is_playing(Walk)) audio_stop_sound(Walk);
+    
     if (menu_sub_state == "main") {
         if (keyboard_check_pressed(vk_left))  { config_tab--; if (config_tab < 0) config_tab = 2; config_idx = 0; play_beep = true; }
         if (keyboard_check_pressed(vk_right)) { config_tab++; if (config_tab > 2) config_tab = 0; config_idx = 0; play_beep = true; }
@@ -293,4 +333,39 @@ for (var i = array_length(shatter_particles) - 1; i >= 0; i--) {
     p.vy += 0.2; 
     p.alpha -= 0.02;
     if (p.alpha <= 0) array_delete(shatter_particles, i, 1);
+}
+
+if (state == "walk" || state == "dash") {
+    var frames_por_lado = 8;
+    var current_frame_idx = floor(anim_frame) % frames_por_lado;
+    
+    if (current_frame_idx == 1 || current_frame_idx == 5 || state == "dash") {
+        if (state != "dash" || (current_time % 60 < 15)) {
+            var _offset_x = 0;
+            if (state == "walk") {
+                _offset_x = (current_frame_idx == 1) ? -5 : 5;
+            } else {
+                _offset_x = random_range(-4, 4);
+            }
+            
+            var _vx = random_range(-1.5, 1.5);
+            var _vy = random_range(-0.5, -1.5);
+            
+            if (dir == 1) _vx = random_range(1.0, 3.0);
+            if (dir == 5) _vx = random_range(-3.0, -1.0);
+            
+            var _p_size = (state == "dash") ? random_range(9, 15) : random_range(4.5, 9);
+           
+            var _dust = instance_create_layer(x + _offset_x, y + 48, "Instances", obj_dust_effect);
+            _dust.vx = _vx;
+            _dust.vy = _vy;
+            _dust.size = _p_size;
+            
+            if (dir == 0) {
+                _dust.depth = depth + 1;
+            } else {
+                _dust.depth = depth - 1;
+            }
+        }
+    }
 }

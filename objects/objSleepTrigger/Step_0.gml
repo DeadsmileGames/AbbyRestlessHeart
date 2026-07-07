@@ -25,6 +25,6 @@ var dist = point_distance(x, y, objPlayer.x, objPlayer.y);
 show_prompt = (dist < trigger_distance && !instance_exists(objDialogue));
 
 if (show_prompt && keyboard_check_pressed(ord("Z"))) {
-    Interact(interact_title, interact_text, interact_color);
+    Interact(interact_pages);
     pending_sleep = true;
 }

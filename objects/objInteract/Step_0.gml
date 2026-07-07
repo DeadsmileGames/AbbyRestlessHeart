@@ -1,14 +1,10 @@
 if (cooldown > 0) cooldown--;
 
 if (!instance_exists(objPlayer)) exit;
-if (instance_exists(objBattleManager)) {
-	exit;
-}
-
+if (instance_exists(objBattleManager)) exit;
 
 var dist = point_distance(x, y, objPlayer.x, objPlayer.y);
-
-var dentro_do_raio = (dist < trigger_distance && !is_triggered && !instance_exists(objDialogue) && !instance_exists(objInteractSystem));
+var dentro_do_raio = (dist < trigger_distance && !is_triggered && !instance_exists(objDialogue));
 
 var e_o_mais_perto = false;
 if (dentro_do_raio) {
@@ -19,12 +15,13 @@ if (dentro_do_raio) {
 }
 
 show_prompt = e_o_mais_perto;
+
 if (show_prompt && keyboard_check_pressed(ord("Z")) && objPlayer.config_open == false) {
     is_triggered = true;
-    Interact(interact_title, interact_text, interact_color);
-    cooldown = 10;
+    Interact(interact_pages);
+    cooldown = 15;
 }
 
-if (is_triggered && !instance_exists(objDialogue)) {
+if (is_triggered && !instance_exists(objInteractSystem) && !instance_exists(objDialogue)) {
     is_triggered = false;
 }

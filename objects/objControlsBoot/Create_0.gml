@@ -6,7 +6,8 @@ controls_list = [
     "[X] - Cancel",
     "[C] - Menu (In-game)",
     "[F4] - Fullscreen",
-    "[Hold ESC] - QUIT TO DESKTOP",
+    "[Hold ESC] - Quit to desktop",
+	"[F6] - Toggle CRT effect",
     "When HP is 0, you lose."
 ];
 

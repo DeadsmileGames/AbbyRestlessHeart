@@ -1,11 +1,18 @@
 function scr_apply_loaded_data(_data) {
     if (instance_exists(objPlayer)) {
-        objPlayer.x = _data.player_x;
-        objPlayer.y = _data.player_y;
-        global.hp = _data.player_hp;
-        global.atk = _data.player_stats.atk;
-        global.def = _data.player_stats.def;
+        objPlayer.x = _data.x;
+        objPlayer.y = _data.y;
+        global.hp = _data.hp;
+        global.atk = _data.atk;
+        global.def = _data.def;
         global.inventory = _data.inventory;
-		global.ChapterOneIsComplete = _data.ChapterOneIsComplete;
+        if (variable_struct_exists(_data, "ChapterOneIsComplete")) {
+            global.ChapterOneIsComplete = _data.ChapterOneIsComplete;
+        }
+        global.vol_bgm = _data.bgm;
+        global.vol_sfx = _data.sfx;
+        global.keyYellow = _data.keyYellow;
+        global.keyGreen = _data.keyGreen;
+        global.keyBlue = _data.keyBlue;
     }
 }

@@ -11,10 +11,17 @@ if (variable_global_exists("load_data") && global.load_data != undefined) {
 }
 
 
-CreateInteract(500, 330, "WARDROBE", "I really should organize this wardrobe. I'm getting old, still living alone... and god, what a disaster.", c_white, 50);
-CreateInteract(700, 590, "WINDOW", "* You approach the window and the world answers. 'It's a waste to have you trapped in here...'", c_aqua, 50);
-CreateInteract(850, 300, "DRAWERS", "Ugh... so many clothes to fold. Just looking at this makes me tired.", c_white, 50);
+CreateInteract(500, 330, [
+    { title: "WARDROBE", text: "I really should organize this wardrobe. I'm getting old, still living alone... and god, what a disaster.", color: c_white }
+], 50);
 
+CreateInteract(700, 590, [
+    { title: "WINDOW", text: "* You approach the window and the world answers. 'It's a waste to have you trapped in here...'", color: c_aqua }
+], 50);
+
+CreateInteract(850, 300, [
+    { title: "DRAWERS", text: "Ugh... so many clothes to fold. Just looking at this makes me tired.", color: c_white }
+], 50);
 scr_show_location("Abby's Bedroom", c_white, true, 1);
 
 if (!started_story) {

@@ -8,7 +8,7 @@ version_alpha = 0;
 credits_alpha = 0;
 firework_particles = [];
 explosion_particles = [];
-game_version = "v0.12b";
+game_version = "v0.15b";
 
 enum MENU_STATE_2 { MAIN, SETTINGS, CREDITS }
 current_state = MENU_STATE_2.MAIN;
@@ -156,5 +156,5 @@ slice_speeds = array_create(slice_count, 0);
 for (var i = 0; i < slice_count; i++) slice_speeds[i] = random_range(15, 30);
 transition_timer = 0;
 show_skip_prompt = false;
-game_version = "v0.12b";
+game_version = "v0.15b";
 load_menu_cooldown = 0;

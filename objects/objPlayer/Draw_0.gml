@@ -24,3 +24,4 @@ if (sprite_exists(active_sheet)) {
     var sub_img_real = frame_base + (dir * frames_por_lado);
     draw_sprite_ext(active_sheet, sub_img_real, x, y, 1.6, 1.6, 0, c_white, 1.0);
 }
+

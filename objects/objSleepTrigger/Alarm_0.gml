@@ -1,1 +1,1 @@
-room_goto(rm_MazeOfMemories);
+room_goto(rm_SweetHome);

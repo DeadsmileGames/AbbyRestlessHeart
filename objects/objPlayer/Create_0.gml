@@ -65,7 +65,6 @@ config_anim_speed = 0.15;
 config_tab = 0; 
 config_idx = 0;
 config_cooldown = 0;
-depth = -y;
 
 death_timer = 0;       
 death_cooldown = 0;    
@@ -105,5 +104,5 @@ combo_timer = 0;
 combo_max_time = 60;
 is_attacking = false;
 attack_damage_display = 0;
-
+dust_particles = [];
 inventory = global.inventory

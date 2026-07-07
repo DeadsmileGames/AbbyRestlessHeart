@@ -42,6 +42,11 @@ global.fullscreen = window_get_fullscreen()
 global.history_answers = array_create(7, -1);
 
 
-//Chapter 1 - MazeOfMemories - Letter puzzle
+//Chapter 1 - SweetHome - Letter puzzle
 global.puzzle_active = false;
 global.puzzle_solved = false;
+global.keyYellow = false
+global.keyBlue = false
+global.keyGreen = false
+global.crt_active = false
+global.minigames = 0;

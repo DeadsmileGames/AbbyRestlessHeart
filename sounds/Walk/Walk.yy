@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":3.9183674,
+  "duration":6.216009,
   "exportDir":"",
   "name":"Walk",
   "parent":{

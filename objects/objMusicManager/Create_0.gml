@@ -8,5 +8,8 @@ current_track = -1;
 target_track = -1;
 
 fade_state = "idle";
-music_volume = 1.0;
 fade_speed = 0.02;
+
+if (!variable_global_exists("vol_bgm")) {
+    global.vol_bgm = 1.0;
+}

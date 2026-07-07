@@ -129,7 +129,20 @@ if (!focus_buttons) {
             if (win) {
                 global.puzzle_solved = true;
                 global.puzzle_active = false;
-                with (instance_create_depth(puzzle_x - 220, puzzle_y, -100, objPortal)) {}
+                global.keyYellow = true;
+                
+                if (!variable_global_exists("inventory")) global.inventory = [];
+                array_push(global.inventory, {
+                    name: "Yellow Key",
+                    type: "key",
+                    value: 0
+                });
+                
+                Interact([
+                    { title: "SYSTEM", text: "Congratulations! You solved the letter puzzle!", color: c_yellow },
+                    { title: "SYSTEM", text: "You received the [YELLOW KEY]. It has been added to your inventory.", color: c_white },
+				]);
+                
                 with (objMinigame) { puzzle_solved = true; instance_destroy(); }
                 instance_destroy();
             } else {
