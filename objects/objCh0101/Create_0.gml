@@ -49,7 +49,7 @@ if (variable_global_exists("load_data") && global.load_data != undefined) {
     }
 }
 
-scr_show_location("Maze Of Memories", c_white, true, 1);
+scr_show_location("Sweet Home", c_white, true, 1);
 
 if (!started_story) {
     alarm[0] = room_speed * 2.5;

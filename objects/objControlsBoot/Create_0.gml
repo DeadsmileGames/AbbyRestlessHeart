@@ -28,5 +28,5 @@ credits_list = [
     "Our supportive community!"
 ];
 
-title_text = "INSOMNIA v0.12b (C) SOMIARI GAMES";
+title_text = "INSOMNIA v0.15b (C) SOMIARI GAMES";
 target_menu_room = rm_Intro;
