@@ -38,6 +38,7 @@
     {"name":"inst_4372176E","path":"rooms/rm_SweetHome/rm_SweetHome.yy",},
     {"name":"inst_3275D5BD","path":"rooms/rm_SweetHome/rm_SweetHome.yy",},
     {"name":"inst_1F791EFA","path":"rooms/rm_SweetHome/rm_SweetHome.yy",},
+    {"name":"inst_557C310B","path":"rooms/rm_SweetHome/rm_SweetHome.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -63,6 +64,7 @@
         {"$GMRInstance":"v4","%Name":"inst_718B080F","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_718B080F","objectId":{"name":"obj","path":"objects/obj/obj.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":3.4859314,"scaleY":0.5625,"x":128.7251,"y":788.5,},
         {"$GMRInstance":"v4","%Name":"inst_875F70E","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_875F70E","objectId":{"name":"obj","path":"objects/obj/obj.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.3156128,"scaleY":1.21875,"x":1698.0498,"y":149.5,},
         {"$GMRInstance":"v4","%Name":"inst_62FF0636","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_62FF0636","objectId":{"name":"objMusicManager","path":"objects/objMusicManager/objMusicManager.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1401.0,"y":708.0,},
+        {"$GMRInstance":"v4","%Name":"inst_557C310B","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_557C310B","objectId":{"name":"objHUD","path":"objects/objHUD/objHUD.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1369.0,"y":686.0,},
       ],"layers":[],"name":"Colisoes","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRTileLayer":"","%Name":"Tiles_3","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Tiles_3","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":17,"SerialiseWidth":30,"TileCompressedData":[
           31,19,18,19,18,19,18,19,18,19,18,19,18,19,18,19,18,19,18,19,18,19,18,19,18,19,18,19,18,19,18,11,-28,

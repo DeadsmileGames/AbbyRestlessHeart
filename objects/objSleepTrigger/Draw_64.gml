@@ -1,3 +1,11 @@
+if instance_exists(objPlayer)
+{
+	if objPlayer.config_open 
+	{
+		exit;
+	}
+}
+
 if (show_prompt) {
     var _cam = view_camera[0];
     var _cam_x = camera_get_view_x(_cam);

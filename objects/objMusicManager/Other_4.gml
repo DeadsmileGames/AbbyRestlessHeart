@@ -8,6 +8,9 @@ switch (room) {
     case rm_Intro:
         _target_room_track = StartMenu;
         break;
+	case rm_IntroChapter1:
+		_target_room_track = TheDisappearance
+		break;
 
     case rm_GameOver:
         _target_room_track = FinalRest;

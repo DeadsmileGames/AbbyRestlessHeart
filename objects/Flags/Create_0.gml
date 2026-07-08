@@ -3,6 +3,7 @@ global.ChapterOneIsComplete = false;
 global.ChapterTwoIsComplete = false;
 global.ChapterThreeIsComplete = false;
 global.ChapterFourIsComplete = false;
+global.porta_liberada = false
 
 //player
 global.isMila = false

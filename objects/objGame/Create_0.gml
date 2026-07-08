@@ -80,12 +80,15 @@ current_chapter = 1;
 show_menu_buttons = false;
 menu_index = 0;
 config_open = false;
-config_y = -400;
-config_target_y = -400;
-config_anim_speed = 0.15;
+config_y = -500;
+config_target_y = -500;
+config_angle = -12;
+config_target_angle = 0;
+config_anim_speed = 0.12;
 config_tab = 0;
 config_idx = 0;
 config_cooldown = 0;
+
 save_menu_open = false;
 menu_sub_state = "main";
 has_any_save = file_exists("save.json");
@@ -93,6 +96,9 @@ shake_load = 0;
 error_flash_load = 0;
 shatter_particles = [];
 game_starting = false;
+load_paper_y = 1200;
+load_paper_target_y = 1200;
+load_paper_angle = 15;
 
 if (!variable_global_exists("vol_bgm")) global.vol_bgm = 1.0;
 if (!variable_global_exists("vol_sfx")) global.vol_sfx = 1.0;
@@ -136,6 +142,20 @@ function build_main_options() {
     main_options = ["NEW GAME", "LOAD SAVE", "SETTINGS"];
 }
 build_main_options();
+col_wood_base    = make_color_rgb(28, 19, 14);
+col_wood_deep    = make_color_rgb(18, 11, 8);
+col_wood_grain   = make_color_rgb(46, 32, 24);
+col_wood_knot    = make_color_rgb(13, 8, 6);
+col_ambient_shd  = make_color_rgb(8, 5, 4);
+col_paper        = make_color_rgb(245, 238, 222);
+col_paper_shadow = make_color_rgb(218, 208, 188);
+col_pencil_lead  = make_color_rgb(55, 52, 48);
+col_blood_pencil = make_color_rgb(166, 45, 45);
+col_notebook_line = make_color_rgb(192, 214, 216);
+col_margin_line  = make_color_rgb(225, 130, 130);
+col_ink_main     = make_color_rgb(35, 32, 28);
+col_ink_sub      = make_color_rgb(115, 108, 96);
+col_wood_light = make_color_rgb(59, 43, 34);
 
 max_pixels = 40;
 pixel_list = array_create(max_pixels);
@@ -143,8 +163,8 @@ for (var i = 0; i < max_pixels; i++) {
     pixel_list[i] = {
         xx: random(display_get_gui_width()),
         yy: random(display_get_gui_height()),
-        spd: random_range(0.5, 1.5),
-        size: choose(5, 6)
+        spd: random_range(0.3, 0.9),
+        size: choose(3, 4, 5)
     };
 }
 

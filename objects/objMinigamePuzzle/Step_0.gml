@@ -1,159 +1,106 @@
 if (message_timer > 0) message_timer--;
+if (input_cooldown > 0) input_cooldown--;
 
-if (menu_dir_active) {
-    if (keyboard_check_pressed(vk_up)) {
-        menu_dir_index = (menu_dir_index + 3) % 4;
-        audio_play_sound(move_sound, 1, false);
-    }
-    if (keyboard_check_pressed(vk_down)) {
-        menu_dir_index = (menu_dir_index + 1) % 4;
-        audio_play_sound(move_sound, 1, false);
-    }
-    if (keyboard_check_pressed(ord("Z"))) {
-        var dir = menu_dir_index;
-        var dr = 0, dc = 0;
-        switch (dir) {
-            case 0: dr = -1; break;
-            case 1: dr = 1; break;
-            case 2: dc = -1; break;
-            case 3: dc = 1; break;
-        }
-        var nr = cursor_y + dr;
-        var nc = cursor_x + dc;
-        if (nr < 0 || nr > 3 || nc < 0 || nc > 3) {
-            message = "Cannot move outside!";
-            message_timer = 30;
-            audio_play_sound(error_sound, 1, false);
-        } else {
-            var temp = grid[cursor_y][cursor_x];
-            grid[cursor_y][cursor_x] = grid[nr][nc];
-            grid[nr][nc] = temp;
-            audio_play_sound(move_sound, 1, false);
-            menu_dir_active = false;
-        }
-    }
-    if (keyboard_check_pressed(ord("X"))) {
-        menu_dir_active = false;
-        audio_play_sound(move_sound, 1, false);
-    }
-    exit;
+if (screen_shake > 0) {
+    screen_shake = max(0, screen_shake - 0.4);
+}
+if (flash_alpha > 0) {
+    flash_alpha = max(0, flash_alpha - 0.025);
 }
 
-if (!focus_buttons) {
-    if (keyboard_check_pressed(vk_up)) {
-        cursor_y = max(0, cursor_y - 1);
-        audio_play_sound(move_sound, 1, false);
-    }
-    if (keyboard_check_pressed(vk_down)) {
-        if (cursor_y < 3) {
-            cursor_y = min(3, cursor_y + 1);
-            audio_play_sound(move_sound, 1, false);
-        } else {
-            focus_buttons = true;
-            button_selected = 0;
-            audio_play_sound(move_sound, 1, false);
+if (!puzzle_won) {
+    var _clean_string = "";
+    var _len = string_length(keyboard_string);
+    
+    for (var i = 1; i <= _len; i++) {
+        var _char = string_char_at(keyboard_string, i);
+        var _ascii = ord(_char);
+        if (_ascii >= 32 && _ascii <= 126) {
+            _clean_string += _char;
         }
     }
-    if (keyboard_check_pressed(vk_left)) {
-        cursor_x = max(0, cursor_x - 1);
-        audio_play_sound(move_sound, 1, false);
+    
+    if (string_length(_clean_string) > 75) {
+        _clean_string = string_copy(_clean_string, 1, 75);
+        keyboard_string = _clean_string;
     }
-    if (keyboard_check_pressed(vk_right)) {
-        cursor_x = min(3, cursor_x + 1);
-        audio_play_sound(move_sound, 1, false);
+    
+    typed_text = _clean_string;
+    
+    if (input_cooldown == 0) {
+        if (keyboard_check_pressed(vk_left)) {
+            button_selected--;
+            if (button_selected < 0) button_selected = total_buttons - 1;
+            if (audio_exists(move_sound)) audio_play_sound(move_sound, 1, false);
+            input_cooldown = 4;
+        }
+        if (keyboard_check_pressed(vk_right)) {
+            button_selected++;
+            if (button_selected >= total_buttons) button_selected = 0;
+            if (audio_exists(move_sound)) audio_play_sound(move_sound, 1, false);
+            input_cooldown = 4;
+        }
     }
-    if (keyboard_check_pressed(ord("Z"))) {
-        menu_dir_active = true;
-        menu_dir_index = 0;
-        audio_play_sound(move_sound, 1, false);
-    }
-} else {
-    if (keyboard_check_pressed(vk_left)) {
-        button_selected = max(0, button_selected - 1);
-        audio_play_sound(move_sound, 1, false);
-    }
-    if (keyboard_check_pressed(vk_right)) {
-        button_selected = min(1, button_selected + 1);
-        audio_play_sound(move_sound, 1, false);
-    }
-    if (keyboard_check_pressed(vk_up)) {
-        focus_buttons = false;
-        audio_play_sound(move_sound, 1, false);
-    }
-    if (keyboard_check_pressed(ord("Z"))) {
+    
+    if (keyboard_check_pressed(vk_enter) || (keyboard_check_pressed(ord("Z")) && input_cooldown == 0)) {
         if (button_selected == 0) {
-            for (var r = 0; r < 4; r++) {
-                for (var c = 0; c < 4; c++) {
-                    grid[r][c] = initial_grid[r][c];
-                }
-            }
-            message = "Reset!";
-            message_timer = 20;
-            audio_play_sound(move_sound, 1, false);
-        } else {
-            var win = false;
-            var correct = true;
-            for (var r = 0; r < 4; r++) {
-                for (var c = 0; c < 2; c++) {
-                    if (grid[r][c] != 0) { correct = false; break; }
-                }
-                if (!correct) break;
-            }
-            if (correct) {
-                for (var r = 0; r < 4; r++) {
-                    for (var c = 2; c < 4; c++) {
-                        if (grid[r][c] != 1) { correct = false; break; }
-                    }
-                    if (!correct) break;
-                }
-            }
-            if (correct) win = true;
-            if (!win) {
-                correct = true;
-                for (var r = 0; r < 4; r++) {
-                    for (var c = 0; c < 2; c++) {
-                        if (grid[r][c] != 1) { correct = false; break; }
-                    }
-                    if (!correct) break;
-                }
-                if (correct) {
-                    for (var r = 0; r < 4; r++) {
-                        for (var c = 2; c < 4; c++) {
-                            if (grid[r][c] != 0) { correct = false; break; }
-                        }
-                        if (!correct) break;
-                    }
-                }
-                if (correct) win = true;
-            }
-            if (win) {
-                global.puzzle_solved = true;
-                global.puzzle_active = false;
-                global.keyYellow = true;
+            keyboard_string = "";
+            typed_text = "";
+            message = "Input cleared.";
+            message_timer = 30;
+            if (audio_exists(move_sound)) audio_play_sound(move_sound, 1, false);
+        } 
+        else if (button_selected == 1) {
+            var target = target_phrases[current_round];
+            
+            if (typed_text == target) {
+                current_round++;
+                keyboard_string = "";
+                typed_text = "";
                 
-                if (!variable_global_exists("inventory")) global.inventory = [];
-                array_push(global.inventory, {
-                    name: "Yellow Key",
-                    type: "key",
-                    value: 0
-                });
+                flash_alpha = 1.0;
+                flash_color = col_memory_blue;
                 
-                Interact([
-                    { title: "SYSTEM", text: "Congratulations! You solved the letter puzzle!", color: c_yellow },
-                    { title: "SYSTEM", text: "You received the [YELLOW KEY]. It has been added to your inventory.", color: c_white },
-				]);
-                
-                with (objMinigame) { puzzle_solved = true; instance_destroy(); }
-                instance_destroy();
+                if (current_round >= total_rounds) {
+                    puzzle_won = true;
+                    global.puzzle_solved = true;
+                    global.puzzle_active = false;
+                    global.keyYellow = true;
+                    
+                    if (!variable_global_exists("inventory")) global.inventory = [];
+                    array_push(global.inventory, {
+                        name: "Yellow Key",
+                        type: "key",
+                        value: 0
+                    });
+                    
+                    Interact([
+                        { title: "SYSTEM", text: "Unbelievable. You reconstructed every lost memory block within the journal.", color: col_blood_red },
+                        { title: "SYSTEM", text: "You received the [YELLOW KEY]. It has been embedded into your soul structure.", color: col_ink_main },
+                        { title: "ABBY", text: "...What are these fading recollections? Why... why are they so heavily blurred?", color: col_ink_sub }
+                    ]);
+                    
+                    with (objMinigame) { puzzle_solved = true; instance_destroy(); }
+                    instance_destroy();
+                } else {
+                    message = "Memory restored... Advancing neural layers.";
+                    message_timer = 50;
+                    if (audio_exists(move_sound)) audio_play_sound(move_sound, 1, false);
+                }
             } else {
-                message = "Not solved yet!";
-                message_timer = 30;
-                audio_play_sound(error_sound, 1, false);
+                message = "The calligraphy or punctuation fails to sync.";
+                message_timer = 65;
+                screen_shake = 10;
+                flash_alpha = 0.6;
+                flash_color = col_blood_red;
+                if (audio_exists(error_sound)) audio_play_sound(error_sound, 1, false);
             }
+        } 
+        else if (button_selected == 2) {
+            global.puzzle_active = false;
+            instance_destroy();
         }
-    }
-    if (keyboard_check_pressed(ord("X"))) {
-        global.puzzle_active = false;
-        instance_destroy();
+        
+        input_cooldown = 10;
     }
 }

@@ -2,6 +2,7 @@ if (cooldown > 0) cooldown--;
 if (puzzle_solved) exit;
 if (!instance_exists(objPlayer)) exit;
 if (objPlayer.config_open) exit;
+if (!objCh0101.active_puzzle) exit;
 
 if (global.puzzle_active || instance_exists(objMinigamePuzzle3)) {
     show_prompt = false;

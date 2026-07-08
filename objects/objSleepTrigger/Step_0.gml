@@ -1,5 +1,12 @@
 if (!instance_exists(objPlayer)) exit;
 if (transition_complete) exit;
+if instance_exists(objPlayer)
+{
+	if objPlayer.config_open 
+	{
+		exit;
+	}
+}
 
 if (sleeping) {
     curtain_progress = min(1, curtain_progress + curtain_speed);
